@@ -5,6 +5,9 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +16,33 @@ class RegisterUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('password')
-            ->add('firstname')
-            ->add('lastname')
+            ->add('email', EmailType::class, [
+                'label' => 'Votre adresse email',
+                'attr' => [
+                    'placeholder' => 'indiquer votre adresse email'
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'label' => 'Votre mot de passe',
+                'attr' => [
+                    'placeholder' => 'indiquer votre mot de passe'
+                ]
+            ])
+            ->add('firstname', TextType::class,[
+                'label' => 'Votre prenom',
+                'attr' => [
+                    'placeholder' => 'indiquer votre prenom'
+                ]
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'Votre nom',
+                'attr' => [
+                    'placeholder' => 'indiquer votre nom'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-success']
+            ])
         ;
     }
 
