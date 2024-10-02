@@ -39,10 +39,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
-                </ul>
+                </ul>s
                 <div class="speed-menu">
-                    <a href=""><i data-feather="user"></i></a>
-                    <a href=""><i data-feather="shopping-cart"></i></a>
+                    {% if  1==1%}
+                        <a href=""><i data-feather="user"></i>Name</a>
+                    {% else %}
+                        <a href=""><i data-feather="user"></i>Connexion</a>
+
+                    {% endif %}
+                    <a href="{{ path("app_login") }}"><i data-feather="shopping-cart"></i></a>
                 </div>
             </div>
         </div>
