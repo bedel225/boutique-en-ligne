@@ -29,7 +29,8 @@ class RegisterUserType extends AbstractType
                     'label' => 'Votre mot de passe',
                     'attr' => [
                         'placeholder' => 'indiquer votre mot de passe'
-                    ]
+                    ],
+                    'hash_property_path' => 'password'
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre mot de passe',
