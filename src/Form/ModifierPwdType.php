@@ -6,7 +6,10 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -38,8 +41,17 @@ class ModifierPwdType extends AbstractType
                     ]
                 ],
                 'mapped' => false,
+                ])
+            ->add('submit', SubmitType::class, [
+                'label'=> "Valider",
+                'attr' => ['class' => 'btn btn-success']
             ])
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                $form = $event->getForm();
+                $user = $form->getConfig()->getOptions()["password_hasher"];
+                dd($user);
 
+            })
         ;
     }
 
@@ -47,6 +59,7 @@ class ModifierPwdType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'password_hasher'=> null
         ]);
     }
 }
