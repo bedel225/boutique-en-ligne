@@ -19,19 +19,25 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/modifier_pwd', name: 'app_modifier_pwd')]
-    public function modifier(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passWordHasher): Response
+    #[Route('/compte/modifier-mot-de-passe', name: 'app_modifier_pwd')]
+    public function modifier(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();
 
         $form = $this->createForm(ModifierPwdType::class, $user, [
-            'password_hasher' => $passWordHasher,
+            'passwordHasher' => $passwordHasher,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Votre mot de passe a ete modifier avec succes'
+            );
+
+            return $this->redirectToRoute('app_login');
         }
         return $this->render('account/modifier_pawd.html.twig', [
             'modifierPwdForm' => $form->createView(),

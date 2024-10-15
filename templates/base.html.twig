@@ -43,7 +43,6 @@
                 <div class="speed-menu">
                     {% if  app.user %}
                         <a href="{{ path('app_account') }}"><i data-feather="user"></i>{{ app.user.firstname }}</a>
-{#                        <a href="{{ path('app_account') }}">Deconnexion</a>#}
                     {% else %}
                         <a href="{{ path('app_login') }}"><i data-feather="user"></i>Connexion</a>
                     {% endif %}
@@ -54,6 +53,16 @@
     </nav>
 </header>
 <main>
+    <div class="container">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert mt-4 alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
     {% block body%} {% endblock %}
 
 
