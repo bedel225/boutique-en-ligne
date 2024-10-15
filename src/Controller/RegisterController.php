@@ -15,7 +15,7 @@ class RegisterController extends AbstractController
     #[Route('/inscription', name: 'app_register')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
+        $user = new User(); dd($user);
         $form = $this->createForm(RegisterUserType::class, $user);
         $form->handleRequest($request);
 
