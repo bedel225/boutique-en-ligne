@@ -51,7 +51,7 @@ class ModifierPwdType extends AbstractType
                 'mapped' => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label'=> "Valider",
+                'label'=> "Modifier mon mot de passe",
                 'attr' => ['class' => 'btn btn-success']
             ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
