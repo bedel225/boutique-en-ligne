@@ -34,12 +34,12 @@ class AccountController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'Votre mot de passe a ete modifier avec succes'
+                'Votre mot de passe a été modifié avec succes'
             );
 
             return $this->redirectToRoute('app_login');
         }
-        return $this->render('account/modifier_pawd.html.twig', [
+        return $this->render('account/modifier_pwd.html.twig', [
             'modifierPwdForm' => $form->createView(),
         ]);
     }
