@@ -2,37 +2,37 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class UserCrudController extends AbstractCrudController
+class CategoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return User::class;
+        return Category::class;
     }
 
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('un utilisateur')
-            ->setEntityLabelInPlural('Utilisateurs')
+            ->setEntityLabelInSingular('une categorie')
+            ->setEntityLabelInPlural('Categories')
             ;
     }
 
+    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->setLabel('')->onlyOnIndex(),
-            TextField::new('firstname')->setLabel('Prenom'),
-            TextField::new('password')->setLabel('Mot de passe'),
-            TextField::new('lastname')->setLabel('Nom'),
-            TextField::new('email')->setLabel('Email')->onlyOnIndex(),
+            IdField::new('id'),
+            TextField::new('title'),
+            TextEditorField::new('description'),
         ];
     }
+    */
 }
