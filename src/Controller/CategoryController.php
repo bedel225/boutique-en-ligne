@@ -13,7 +13,7 @@ class CategoryController extends AbstractController
     public function index($slug, CategoryRepository $categoryRepository): Response
     {
         $category = $categoryRepository->findOneBySlug($slug);
-        //dd($category);
+
         return $this->render('category/index.html.twig', [
             'category' => $category,
         ]);
