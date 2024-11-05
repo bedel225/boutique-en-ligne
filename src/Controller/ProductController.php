@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product/{slug}', name: 'app_product')]
+    #[Route('/produit/{slug}', name: 'app_product')]
     public function index($slug, ProductRepository $productRepository): Response
     {
-        $product = $productRepository->findOneBy(['name' => $slug]);
+        $product = $productRepository->findOneBySlug( $slug);
         return $this->render('product/index.html.twig', [
             'product' => $product,
         ]);

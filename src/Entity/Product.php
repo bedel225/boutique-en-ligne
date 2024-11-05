@@ -93,7 +93,7 @@ class Product
         return $this->price;
     }
 
-    public function getPriceWt(): ?float
+    public function getPricewt(): ?float
     {
         $coeff = 1+$this->price/100;
         return $coeff*$this->price;
