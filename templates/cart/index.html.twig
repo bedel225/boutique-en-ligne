@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <h1>Mon panier</h1>
+        <div class="row">
+            <div class="col-md-8">
+               <h3>mes produit</h3>
+                {%for product in cart %}
+                    {{ dump(product) }}
+                    <img src="/uploads/{{ product.object.illustration }}" class="img-fluid" alt=" {{ product.object.name }}">
+                    <span class="d-block mb-3">{{ product.object.pricewt|price }}</span>
+
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <h3>mes produit</h3>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
