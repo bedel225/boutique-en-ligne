@@ -10,7 +10,12 @@
             </div>
             <div class="col-md-9">
                 <h5>Mes adresses</h5>
-                la liste de mes adresses
+                <a href="{{ path('app_account_address_form') }}" >Ajouter une adresse</a>
+                {% for address in addresses %}
+                    <br>{{  address.firstname }} {{  address.lastname }}
+                    <br>{{  address.address }} {{  address.postal }}
+                    <br>{{  address.city}}  {{  address.country }}<br>
+                {% endfor %}
             </div>
         </div>
 
