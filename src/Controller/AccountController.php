@@ -60,11 +60,34 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/compte/adresse/ajouter', name: 'app_account_address_form')]
-    public function addressForm(Request $request): Response
+    #[Route('/compte/adresse/ajouter/{id}', name: 'app_account_address_form', defaults: ['id'=>null])]
+    public function addressForm(Request $request, $id): Response
     {
-        $address = new Address();
-        $address ->setUser($this->getUser());
+        if ($id){
+            $address = $this->entityManager->getRepository(Address::class)->findOneById($id);
+            if ($address){
+                if ($address->getUser() != $this->getUser()){
+                    $this->addFlash(
+                        'warning',
+                        "Vous n'avez pas les droit necessaire pour modifier cette adresse."
+                    );
+                    return $this->redirectToRoute('app_account_addresses');
+                }
+            }else{
+                $this->addFlash(
+                    'warning',
+                    "Pas d'adresse disponble avec cet id."
+                );
+                return $this->redirectToRoute('app_account_addresses');
+            }
+
+        }else{
+            dd(__LINE__);
+
+            $address = new Address();
+            $address ->setUser($this->getUser());
+        }
+
 
         $addressForm = $this->createForm(AddressUserType::class, $address);
         $addressForm->handlerequest($request);
@@ -75,7 +98,7 @@ class AccountController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre adresse a été sauvegardé avec succes'
+                'Votre adresse est correectement sauvegardée.'
             );
 
             return $this->redirectToRoute('app_account_addresses');
